@@ -14,33 +14,29 @@ return [0, 1].
 
 def two_sum_solution_one(nums, target):
     """Solution 1: use 2 loops"""
-    m = dict()
-    results = list()
+    d = dict()
+    results = [0, 0]
     for i in range(0, len(nums)):
-        m[nums[i]] = i
-    i = 0
-    while i < len(nums):
+        d[nums[i]] = i
+    for i in range(0, len(nums)):
         t = target - nums[i]
-        if (t in m.keys()) and m[t] != i:
-            result = (i, m[t])
-            del nums[m[t]], m[t]
-            results.append(result)
-            continue
+        if (t in d.keys()) and d[t] != i:
+            results = [i, d[t]]
+            break
         i += 1
     return results
 
 
 def two_sum_solution_two(nums, target):
     """Solution 2: use 1 loop"""
-    m = dict()
-    results = list()
+    d = dict()
+    results = [0, 0]
     for i in range(0, len(nums)):
-        if (target - nums[i]) in m.keys():
-            result = (i, m[target - nums[i]])
-            results.append(result)
-            continue
-        m[nums[i]] = i
-    return results
+        if (target - nums[i]) in d.keys():
+            results = [i, d[target - nums[i]]]
+            break
+        d[nums[i]] = i
+    return sorted(results)
 
 
 if __name__ == "__main__":
